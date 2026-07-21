@@ -101,7 +101,7 @@ def format_row(row: pd.Series) -> str:
                 qty = None
             if qty is not None:
                 if qty > 0:
-                    lines.append(f"🟢 В наличии: {value} шт.")
+                    lines.append(f"🟢 В наличии: {value} коробок.")
                 else:
                     lines.append("🔴 Нет в наличии")
             else:
@@ -113,8 +113,7 @@ def format_row(row: pd.Series) -> str:
 
 
 HELP_TEXT = (
-    "Просто напишите артикул (или его часть) — например, 885 или TM885, "
-    "регистр и раскладка не важны."
+    "Просто напишите артикул для поиска"
 )
 
 
