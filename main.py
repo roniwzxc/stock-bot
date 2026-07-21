@@ -90,27 +90,23 @@ def format_row(row: pd.Series) -> str:
 
     for i, col in enumerate(other_cols):
         value = row[col]
-        
-        if i == 0:
-    if pd.isna(value) or not str(value).strip():
-        lines.append("🔴 Нет в наличии")
-        continue
 
         if i == 0:
-            # первая колонка после артикула — количество на складе
-            try:
-                qty = float(str(value).replace(",", "."))
-            except ValueError:
-                qty = None
-            if qty is not None:
-                if qty > 0:
-                    lines.append(f"🟢 В наличии: {value} коробок.")
-                else:
-                    lines.append("🔴 Нет в наличии")
+            # Первая колонка после артикула — количество
+            if pd.isna(value) or not str(value).strip():
+                lines.append("🔴 Нет в наличии")
             else:
-                lines.append(f"    {col}: {value}")
+                try:
+                    qty = float(str(value).replace(",", "."))
+                    if qty > 0:
+                        lines.append(f"🟢 В наличии: {int(qty)} коробок.")
+                    else:
+                        lines.append("🔴 Нет в наличии")
+                except ValueError:
+                    lines.append(f"🟢 В наличии: {value}")
         else:
-            lines.append(f"    {col}: {value}")
+            if not pd.isna(value) and str(value).strip():
+                lines.append(f"    {col}: {value}")
 
     return "\n".join(lines)
 
