@@ -175,8 +175,7 @@ async def on_startup(app: web.Application):
 
 
 async def on_shutdown(app: web.Application):
-    if WEBHOOK_HOST:
-        await bot.delete_webhook()
+    await bot.session.close()
 
 
 def run_webhook():
