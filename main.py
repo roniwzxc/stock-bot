@@ -90,7 +90,8 @@ def format_row(row: pd.Series) -> str:
 
     for i, col in enumerate(other_cols):
         value = row[col]
-if i == 0:
+        
+        if i == 0:
     if pd.isna(value) or not str(value).strip():
         lines.append("🔴 Нет в наличии")
         continue
